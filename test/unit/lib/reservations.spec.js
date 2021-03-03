@@ -2,9 +2,9 @@ const proxyquire = require('proxyquire');
 const sinon = require('sinon');
 const chai = require('chai');
 const sinonChai = require('sinon-chai');
+const db = require('sqlite');
 const Reservation = require('../../../lib/schema/reservation');
 require('../../../lib/reservations');
-const db = require('sqlite');
 
 chai.use(sinonChai);
 
