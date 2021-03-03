@@ -36,7 +36,7 @@ describe('Reservation Schema',function(){
       });
     });
 
-    it('should failt a reservation with a bad email', function(done){
+    it('should fail a reservation with a bad email', function(done){
       const reservation = new Reservation({
         date: '2017/06/10',
         time: '06:02 AM',
