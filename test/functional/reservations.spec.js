@@ -59,4 +59,42 @@ describe('/reservations', function() {
         });
     });
   });
+
+  context('POST', function() {
+    it('should accept a valid reservation request', function(done) {
+      chai.request(app)
+        .post('/reservations')
+        .set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+          date: '2017/06/10',
+          time: '06:02 AM',
+          name: 'Family',
+          party: 8,
+          email: 'username@example.com'
+        })
+        .end(function (err, res) {
+          res.text.should.contain('Thanks, your booking request #1349');
+          res.should.have.status(200);
+          done(err);
+        });
+    });
+
+    it('should reject an invalid reservation request', function(done) {
+      chai.request(app)
+        .post('/reservations')
+        .set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+          date: '2017/06/10',
+          time: '06:02 AM',
+          name: 'Family',
+          party: 'bananas',
+          email: 'username@example.com'
+        })
+        .end(function (err, res) {
+          res.text.should.contain('Sorry, there was a problem with your booking request');
+          res.should.have.status(400);
+          done();
+        });
+    });
+  });
 });
